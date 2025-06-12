@@ -11,29 +11,36 @@ import PortModel from '../model/portModel.js';
 export const addService = async (req, res) => {
     try {
     const {title} = req.body;
-    const image = req.file?.path;
+    const image = req.files?.image?.[0]?.path;
+    const video = req.files?.video?.[0]?.path;
 
-    if (!title || !image) {
+    if (!title || !image || !video) {
         return res.status(400).json({
         success: false,
-        message: "Product image is missing",
+        message: "Title, image & video is missing",
         });
     }
 
-    let uploadedImage;
+    let uploadedImage, uploadedVideo;
     try {
         uploadedImage = await uploadOnCloudinary(image);
+        uploadedVideo = await uploadOnCloudinary(video);
         console.log("uploadedImage", uploadedImage);
+        console.log("uploadedVideo", uploadedVideo);
     } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);
-        return res.status(500).json({message: "Error uploading image to Cloudinary:"})
+        return res.status(500).json({
+            success: false,
+            message: "Error uploading image to Cloudinary:",
+        });
     }
 
 
     // Create MongoDB record
     const newProduct = new ServiceModel({
         title,
-        image: uploadedImage?.url || "",
+        image: uploadedImage?.secure_url || "",
+        video: uploadedVideo?.secure_url || ""
     });
 
     const savedProduct = await newProduct.save();

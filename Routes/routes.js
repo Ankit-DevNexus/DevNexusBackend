@@ -20,7 +20,13 @@ router.post('/upload', upload.fields([
 );
 
 router.post('/addPort', upload.single('image'), addPort);
-router.post('/addService', upload.single('image'), addService);
+
+router.post('/addService', upload.fields([
+    {name: 'image', maxCount: 1},
+    {name: 'video', maxCount: 1},
+]), addService
+);
+
 router.post('/addBrand',upload.single('image'), addBrand);
 router.post('/addIndustry', upload.single('image'), addIndustry);
 

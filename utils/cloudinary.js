@@ -18,8 +18,8 @@ const uploadOnCloudinary = async (localFilePath) => {
         // if(!localFilePath) return null;
 
         const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type: 'image',
-            timeout: 60000,
+            resource_type: 'auto',
+            timeout: 300000,
         });
         // if(!response || response.error) {
         //     console.error("Cloudinary response error:", response?.error);
