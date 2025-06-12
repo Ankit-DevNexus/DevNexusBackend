@@ -10,25 +10,27 @@ export const createPortfolioToCloudinary = async(req, res) => {
         console.log("req.files:", req.files);
 
         const image = req.files?.image?.[0]?.path;
-        const {title, description} = req.body;
+        const logo = req.files?.logo?.[0]?.path;
+        const {description} = req.body;
         const pdf = req.files?.pdf?.[0]?.path;
 
-        if(!image || !pdf) {
+        if(!image || !logo ||!pdf) {
             return res.status(400).json({
                 success: false,
-                message: "Please upload both image and pdf",
+                message: "Please upload image, logo and pdf",
             });
         }
 
-        if(!title || !description) {
+        if( !description) {
             return res.status(400).json({
                 success: false,
-                message: "Title and description are required",
+                message: "description are required",
             });
         }
-        let uploadedImage, uploadedPdf;
+        let uploadedImage, uploadedLogo,uploadedPdf;
         try {
             uploadedImage = await uploadOnCloudinary(image);
+            uploadedLogo = await uploadOnCloudinary(logo);
             uploadedPdf = await uploadOnCloudinary(pdf);
             // console.log("uploadedImage:", uploadedImage);
             // console.log("uploadedPdf:", uploadedPdf); //?.url
@@ -41,7 +43,7 @@ export const createPortfolioToCloudinary = async(req, res) => {
 
         const newProduct = new ProjectModel({
             image: uploadedImage?.secure_url || '',
-            title: title.trim(), 
+            logo: uploadedLogo?.secure_url || '',
             description: description.trim(),
             pdf: uploadedPdf?.secure_url || '', 
         });

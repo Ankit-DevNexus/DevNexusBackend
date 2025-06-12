@@ -13,6 +13,7 @@ const router = express.Router();
 
 router.post('/upload', upload.fields([
     {name: 'image', maxCount: 1},
+    {name: 'logo', maxCount: 1},
     {name: 'pdf', maxCount: 1},
 ]),
     createPortfolioToCloudinary
