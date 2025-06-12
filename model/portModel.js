@@ -5,10 +5,6 @@ const portSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
-    title: {
-        type: String,
-        required: true
-    }
 });
 
 const PortModel = mongoose.model("Port", portSchema);

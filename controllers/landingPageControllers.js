@@ -145,7 +145,6 @@ export const textSliderImage = async (req, res) => {
 export const addPort = async (req, res) => {
     try {
     const image = req.file?.path;
-    const {title} = req.body;
 
 
     if(!image) {
@@ -161,12 +160,15 @@ export const addPort = async (req, res) => {
         console.log("uploadedImage", uploadedImage);
     } catch (error) {
         console.error("Error uploading image to cloudinary", error);
-        return res.status(500).json({message: "Error Uploading image to Cloudinary"})
+        return res.status(500).json({
+            success: false,
+            message: "Error Uploading image to Cloudinary",
+            error: error.message,
+        });
     }
     
     const newPort = new PortModel({
         image: uploadedImage?.url || "",
-        title,
     });
     const savedPort = await newPort.save();
     res.status(201).json({
