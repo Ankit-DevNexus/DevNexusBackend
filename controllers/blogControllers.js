@@ -103,20 +103,52 @@ export const BlogImageController = async (req, res) => {
 export const EditBlogController = async (req, res) => {
     try {
     const { id } = req.params;
-    const {title, blogContent, image} = req.body;
+    const {title, blogContent} = req.body;
+    const image = req.file?.path;
 
-    const updatedBlog = await BlogModel.findByIdAndUpdate(
-        id, 
-        {title, blogContent, image},
-        { new: true }
-    ); 
+    const existingBlog = await BlogModel.findById(id);
 
-    if(!updatedBlog) {
+    if(!existingBlog) {
         return res.status(404).json({
             success: false,
             message: "Blog Not Found",
         });
     }
+
+    let updatedData = {
+        title,
+        blogContent,
+    };
+
+    if(image) {
+        if(existingBlog.imagePublicId) {
+            await cloudinary.uploader.destroy(existingBlog.imagePublicId);
+        }
+    }
+
+    // const updatedBlog = await BlogModel.findByIdAndUpdate(
+    //     id, 
+    //     {title, blogContent, image},
+    //     { new: true }
+    // ); 
+
+    const uploadedImage = await cloudinary.uploader.upload(image, {
+        folder: 'blogs'
+    });
+
+    fs.unlinkSync(image);
+
+    updatedData.image = uploadedImage.secure_url;
+    updatedData.imagePublicId = uploadedImage.public_id;
+
+    const updatedBlog = await BlogModel.findByIdAndUpdate(id,updatedData, {new: true});
+
+    // if(!updatedBlog) {
+    //     return res.status(404).json({
+    //         success: false,
+    //         message: "Blog Not Found",
+    //     });
+    // }
 
     res.status(200).json({
         success: true,
@@ -125,7 +157,45 @@ export const EditBlogController = async (req, res) => {
     });
     } catch (error) {
     res.status(500).json({
+        success: false,
+        message: "Internal Server Error",
         error: error.message
-    })
+    });
     }
-}
+};
+
+export const DeleteBlogController = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Check if blog exists
+        const blog = await BlogModel.findById(id);
+        if (!blog) {
+            return res.status(404).json({
+                success: false,
+                message: "Blog not found",
+            });
+        }
+
+        // Optional: Delete image from Cloudinary (if you store the `public_id`)
+        // Skipping for now, unless you need it.
+
+        if(blog.imagePublicId) {
+            await cloudinary.uploader.destroy(blog.imagePublicId);
+        }
+        await BlogModel.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: "Blog deleted successfully",
+        });
+
+    } catch (error) {
+        console.error("Delete Blog Error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete blog",
+            error: error.message,
+        });
+    }
+};

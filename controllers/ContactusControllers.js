@@ -2,9 +2,19 @@ import nodemailer from 'nodemailer';
 
 export const contactus = async (req, res) => {
     try {
-        const {name, email, phoneNumber, websiteUrl, lookingFor, message} = req.body;
+        const {name, email, phoneNumber, websiteUrl, lookingFor, message} = req.body || {};
+        console.log("Request Body:", req.body);
+
         const AdminMail = process.env.ADMIN_MAIL;
         const AdminMail2 = process.env.ADMIN_MAIL2;
+
+        if(!email || !AdminMail || !AdminMail2) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing Email or Admin Email",
+                data: {email: email || "Not Provided", AdminMail, AdminMail2}
+            });
+        }
         
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
