@@ -13,8 +13,12 @@ const ourTeamSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    technology: {
+    experience: {
         type: String,
+        required: true
+    },
+    technology: {
+        type: [String],
         required: true
     },
 });

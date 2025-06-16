@@ -63,3 +63,21 @@ export const createPortfolioToCloudinary = async(req, res) => {
         });
     }
 };
+
+export const getPortfolios = async (req, res) => {
+    try {
+        const portfolios = await ProjectModel.find().sort({ createdAt: -1 }); // latest first
+        res.status(200).json({
+            success: true,
+            message: "Portfolio data fetched successfully",
+            data: portfolios,
+        });
+    } catch (error) {
+        console.error("Error fetching portfolio data:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while fetching portfolio data",
+            error: error.message,
+        });
+    }
+};

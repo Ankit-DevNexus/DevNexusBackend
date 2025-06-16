@@ -60,6 +60,24 @@ export const addService = async (req, res) => {
     }
 };
 
+export const getServices = async (req, res) => {
+    try {
+        const services = await ServiceModel.find().sort({ createdAt: -1 }); // latest first
+        res.status(200).json({
+            success: true,
+            message: "Services fetched successfully",
+            data: services,
+        });
+    } catch (error) {
+        console.error("Error fetching services:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while fetching services",
+            error: error.message,
+        });
+    }
+};
+
 export const textSliderImage = async (req, res) => {
     try {
         const textImage1 = req.files?.textImage1?.[0]?.path;
@@ -105,6 +123,25 @@ export const textSliderImage = async (req, res) => {
             });
     }
 };
+
+export const getTextSliderImages = async (req, res) => {
+    try {
+        const sliders = await TextSliderModel.find().sort({ createdAt: -1 }); // optional: latest first
+        res.status(200).json({
+            success: true,
+            message: "Text slider images fetched successfully",
+            data: sliders,
+        });
+    } catch (error) {
+        console.error("Error fetching text slider images:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while fetching text slider images",
+            error: error.message,
+        });
+    }
+};
+
 
 // export const addBrand = async (req,res) => {
 //     try {
@@ -193,6 +230,24 @@ export const addPort = async (req, res) => {
 }
 };
 
+export const getPorts = async (req, res) => {
+    try {
+        const ports = await PortModel.find().sort({ createdAt: -1 }); // Optional: latest first
+        res.status(200).json({
+            success: true,
+            message: "Port images fetched successfully",
+            data: ports,
+        });
+    } catch (error) {
+        console.error("Error fetching port images:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while fetching port images",
+            error: error.message,
+        });
+    }
+};
+
 export const addIndustry = async (req, res) => {
     try {
         const {title} = req.body;
@@ -233,4 +288,21 @@ export const addIndustry = async (req, res) => {
     }
 };
 
+export const getIndustries = async (req, res) => {
+    try {
+        const industries = await IndustryModel.find().sort({ createdAt: -1 }); // latest first
+        res.status(200).json({
+            success: true,
+            message: "Industries fetched successfully",
+            data: industries,
+        });
+    } catch (error) {
+        console.error("Error fetching industries:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while fetching industries",
+            error: error.message,
+        });
+    }
+};
 

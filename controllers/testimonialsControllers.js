@@ -36,3 +36,21 @@ export const addTestimonials = async (req, res) => {
         });
     }
 };
+
+export const getTestimonials = async (req, res) => {
+    try {
+        const testimonials = await TestimonalsModel.find().sort({ createdAt: -1 }); // latest first
+        res.status(200).json({
+            success: true,
+            message: "Testimonials fetched successfully",
+            data: testimonials,
+        });
+    } catch (error) {
+        console.error("Error fetching testimonials:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while fetching testimonials",
+            error: error.message,
+        });
+    }
+};

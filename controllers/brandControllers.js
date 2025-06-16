@@ -45,3 +45,23 @@ export const addBrand = async (req,res) => {
         });
     }
 };
+
+
+// Get all brand data
+export const getBrands = async (req, res) => {
+    try {
+        const brands = await BrandModel.find().sort({ createdAt: -1 }); // Optional: sort by latest
+        res.status(200).json({
+            success: true,
+            message: "Brands fetched successfully",
+            data: brands
+        });
+    } catch (error) {
+        console.error("Error fetching brands:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while fetching brands",
+            error: error.message,
+        });
+    }
+};
