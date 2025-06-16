@@ -44,8 +44,8 @@ router.get('/all-Industry', getIndustries);
 router.post('/addTeamMember', svgUpload.single('avatar'), addTeamMember);
 router.get('/All-team', getTeamMembers);
 
-router.post('/upload-image', upload.single('image'), BlogImageController);
-router.post('/create-blogs', BlogController);
+// router.post('/upload-image', upload.single('image'), BlogImageController);
+router.post('/create-blogs', upload.single('image'), BlogController);
 router.get('/blogs', AllBlogController);
 router.put("/:id", EditBlogController);
 
