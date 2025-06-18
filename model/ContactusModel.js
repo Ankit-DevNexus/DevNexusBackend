@@ -19,7 +19,7 @@ const ContactusSchema = new mongoose.Schema({
     },
     message: {
         type: String,
-        required: true
+        // required: true
     }
 });
 
