@@ -13,11 +13,7 @@ const ContactusSchema = new mongoose.Schema({
         type : String,
         required: true
     },
-    websiteUrl: {
-        type: String,
-        required: true
-    },
-    lookingFor: {
+    services: {
         type: String,
         required: true
     },

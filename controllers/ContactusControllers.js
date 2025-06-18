@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 
 export const contactus = async (req, res) => {
     try {
-        const {name, email, phoneNumber, websiteUrl, lookingFor, message} = req.body || {};
+        const {name, email, phoneNumber,  services ,message} = req.body || {};
         console.log("Request Body:", req.body);
 
         const AdminMail = process.env.ADMIN_MAIL;
@@ -38,15 +38,14 @@ export const contactus = async (req, res) => {
                     <ul>
                         <li><strong>Name:</strong>${name}</li>
                         <li><strong>Email:</strong>${email}</li>
-                        <li><strong>phoneNumber:</strong>${phoneNumber}</li>
-                        <li><Strong>Website URL:</Strong>${websiteUrl}</li>
-                        <li><Strong>Looking For:</Strong>${lookingFor}</li>
-                        <li><strong>message</strong>${message}</li>
+                        <li><strong>Phone Number:</strong>${phoneNumber}</li>
+                        <li><strong>Selected Service:</strong> ${services}</li>                                                
+                        <li><strong>Message:</strong>${message}</li>
                     </ul>
 
                     <p>If any of the above information is incorrect, feel free to contact us again.</p>
                     <p>Best regards,<br>
-                    DevNexus Tram<br>
+                    DevNexus Team<br>
                     <a href="http://devnexus.in/">https://devnexus.in</a></p>
                 </div>`
         };
@@ -63,8 +62,7 @@ export const contactus = async (req, res) => {
             <p><b>Name:</b>${name}</p>
             <p><b>Email:</b>${email}</p>
             <p><b>phoneNumber:</b>${phoneNumber}</p>
-            <p><b>Website URL:</b>${websiteUrl || "Not Provide"}</p>
-            <p><b>Looking For:</b>${lookingFor || "Not specified"}</p>
+            <p><b>services:</b>${services}</p>
             <p><b>message: </b>${message}</p>
             <p>Please follow up with the client at your earliest convenience.</p>
             `,
@@ -81,8 +79,7 @@ export const contactus = async (req, res) => {
             <p><b>Name:</b>${name}</p>
             <p><b>Email:</b>${email}</p>
             <p><b>phoneNumber</b>${phoneNumber}</p>
-            <p><b>Website URL:</b>${websiteUrl || "Not Provide"}</p>
-            <p><b>Looking For:</b>${lookingFor || "Not specified"}</p>
+            <p><b>services:</b>${services}</p>
             <p><b>message</b>${message}</p>
             <p>Please follow up with the client at your earliest convenience.</p>
             `,
