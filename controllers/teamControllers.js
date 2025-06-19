@@ -49,11 +49,11 @@ export const addTeam = async (req,res) => {
 
 export const getTeam = async (req, res) => {
     try {
-        const brands = await TeamModel.find().sort({ createdAt: -1 }); // Optional: sort by latest
+        const Teams = await TeamModel.find().sort({ createdAt: -1 }); // Optional: sort by latest
         res.status(200).json({
             success: true,
             message: "Team fetched successfully",
-            data: brands
+            data: Teams
         });
     } catch (error) {
         console.error("Error fetching team:", error);
