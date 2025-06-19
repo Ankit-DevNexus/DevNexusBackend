@@ -9,6 +9,7 @@ import { addTestimonials, getTestimonials } from '../controllers/testimonialsCon
 import { addBrand, getBrands } from '../controllers/brandControllers.js';
 import { chatBot, getAllChatBotMessages } from '../controllers/chatBotControllers.js';
 import { contactus } from '../controllers/ContactusControllers.js';
+import { addTeam, getTeam } from '../controllers/teamControllers.js';
 
 const router = express.Router();
 
@@ -68,5 +69,9 @@ router.post('/chatBot', chatBot);
 router.get('/getAllChatBotMessages', getAllChatBotMessages);
 
 router.post("/contact-us", contactus);
+
+router.post("/meet-team", upload.single('image'), addTeam);
+
+router.get('/getTeam', getTeam);
 
 export default router;
