@@ -30,11 +30,11 @@ export const addTeam = async (req,res) => {
         image : uploadedImage?.url || "",
     });
 
-    const savedBrand = await newTeam.save();
+    const savedTeam = await newTeam.save();
     res.status(201).json({
         success: true,
         message: "Image Uploaded and Team Saved Successfully",
-        data: savedBrand,
+        data: savedTeam,
     });
     }catch (error) {
     console.error("upload error", error);
