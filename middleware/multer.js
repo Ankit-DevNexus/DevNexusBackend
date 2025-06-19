@@ -10,6 +10,8 @@ const storage = multer.diskStorage({
 });
 
 const svgfileFilter = (req, file, cb) => {
+    // console.log("File Upload Attempt:", file.originalname);
+    // console.log("MIME TYPE:", file.mimetype);
     if(file.mimetype === 'image/svg+xml'){
         cb(null, true);
     } else {

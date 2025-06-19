@@ -6,8 +6,12 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 export const addTestimonials = async (req, res) => {
     try {
-        const { description , name, destination } = req.body;
+        const { description , name, destination, star } = req.body || {};
         const file = req.file?.path;
+
+        console.log("Body", req.body);
+        console.log("FILE", req.file);
+
 
         if(!file) {
             return res.status(400).json({
@@ -15,6 +19,14 @@ export const addTestimonials = async (req, res) => {
                 message: 'Avatar (Svg) is required'
             });
         }
+
+        if(!star || isNaN(star) || star < 1 || star > 5) {
+            return res.status(400).json({
+                success: false,
+                message: 'Star must be between 1 and 5'
+            });
+        };
+
         const uploadTestimonials = await uploadOnCloudinary(file);
         if(!uploadTestimonials?.url) {
             return res.status(500).json({success: false, message: "Cloudinary upload failed"});
@@ -24,7 +36,8 @@ export const addTestimonials = async (req, res) => {
             description,
             avatar: uploadTestimonials.url,
             name,
-            destination
+            destination,
+            star
         });
         res.status(201).json({success: true, data: testiMonials});
     } catch (error) {
