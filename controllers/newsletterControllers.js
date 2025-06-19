@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import NewsletterModel from '../model/newsLetterModel.js';
 
 export const subscribeToNewsletter = async (req, res) => {
-    const {email} = req.body;
+    const {email} = req.query;
 
     if(!email) {
         return res.status(400).json({success: false, message: "Email is required"});
