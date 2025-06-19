@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import TeamModel from '../model/TeamModel.js';
-
+// add this controller
 export const addTeam = async (req,res) => {
     try {
         const image = req.file?.path;
