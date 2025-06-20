@@ -1,9 +1,10 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import ChatBotModel from '../model/chatBotModel.js';
+import nodemailer from 'nodemailer';
 
 export const chatBot = async (req, res) => {
-        const { name, email, phoneNumber } = req.body;
+        const { name, email, phoneNumber } = req.query;
 
         if(!name || !email || !phoneNumber) {
             return res.status(400).json({
@@ -14,6 +15,35 @@ export const chatBot = async (req, res) => {
         try {
             const chatBot = new ChatBotModel({name, email, phoneNumber});
             await chatBot.save();
+
+            const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT),
+            secure: true,
+            auth: {
+                user: process.env.USER_MAIL,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        const mailOptions = {
+            from: `"ChatBot Form" <${process.env.USER_MAIL}>`,
+            to: email,
+            subject: `New ChatBot Message from ${name}`,
+            html: `
+                <h3>Hello ${name},</h3>
+                <p>Thank you for reaching out! We have received your message.</p>
+                <p><strong>Your Details:</strong></p>
+                <p>Email: ${email}</p>
+                <p>Phone: ${phoneNumber}</p>
+                <br/>
+                <p>We will get back to you shortly.</p>
+                <p>– DevNexus Team</p>
+            `,
+        };
+        console.log("Sending email with: ", mailOptions);
+
+        await transporter.sendMail(mailOptions);
             res.status(201).json({
                 success: true,
                 message: 'Chat message submit successfully',
