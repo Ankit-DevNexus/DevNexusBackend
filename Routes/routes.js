@@ -9,6 +9,9 @@ import { addTestimonials, getTestimonials } from '../controllers/testimonialsCon
 import { addBrand, getBrands } from '../controllers/brandControllers.js';
 import { chatBot, getAllChatBotMessages } from '../controllers/chatBotControllers.js';
 import { contactus } from '../controllers/ContactusControllers.js';
+import { addTech, getTechs } from '../controllers/techControllers.js';
+import { AddUIUXDesignController, getUIUXDesignController } from '../controllers/UIUXDesignTechnologiesController.js';
+import { AddBlockchainController, getBlockchainController } from '../controllers/BlockchainPlatformController.js';
 
 const router = express.Router();
 
@@ -68,6 +71,16 @@ router.post('/chatBot', chatBot);
 router.get('/getAllChatBotMessages', getAllChatBotMessages);
 
 router.post("/contact-us", contactus);
+
+router.post("/addTech", upload.single('image'), addTech);
+
+router.get('/getTechs', getTechs);
+
+router.post('/add-uiux', svgUpload.single('UIUXImage'), AddUIUXDesignController);
+router.get('/all-uiux', getUIUXDesignController);
+
+router.post('/add-blockchain-platform', svgUpload.single('BlockchainImage'), AddBlockchainController);
+router.get('/all-blockchain-platform', getBlockchainController);
 
 
 export default router;
