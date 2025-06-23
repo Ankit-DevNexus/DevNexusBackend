@@ -1,21 +1,72 @@
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Helper to load and replace HTML placeholders
+const loadHtmlTemplate = (filename, replacements = {}) => {
+    const filePath = path.join(__dirname, `../EmailTemplate/${filename}`);
+    let html = fs.readFileSync(filePath, 'utf-8');
+
+    for (const [key, value] of Object.entries(replacements)) {
+        html = html.replaceAll(`[${key}]`, value);
+    }
+
+    return html;
+};
+
+// Service-specific content
+const serviceContent = {
+    'webDevelopment': {
+        subject: 'Web Development Services - Thank You!',
+        body: `Thank you for contacting us for Web Development. Our team will reach out shortly with the best digital solutions tailored to your needs.`,
+        template: 'web_development.html'
+    },
+    'mobileDevelopment': {
+        subject: 'Mobile Development Services - Thank You!',
+        body: `Thank you for showing interest in our Mobile App Development services. We'll help turn your app idea into reality.`,
+        template: 'mobile_development.html'
+    },
+    'UIUX': {
+        subject: 'UI/UX Design Services - Thank You!',
+        body: `Thank you for reaching out regarding UI/UX design. We aim to create intuitive and elegant experiences for your users.`,
+        template: 'ui_ux_template.html'
+    },
+    'digitalMarketing': {
+        subject: 'Digital Marketing Services - Thank You!',
+        body: `Thank you for your interest in Digital Marketing. We will help grow your brand's online presence and visibility.`,
+        template: 'digital_marketing.html'
+    },
+    'BlockChain': {
+        subject: 'Blockchain Solutions - Thank You!',
+        body: `We're excited to discuss how Blockchain technology can enhance your project. Our team will contact you soon.`,
+        template: 'blockchain_tech.html'
+    },
+    'AITechnologies': {
+        subject: 'AI Solutions - Thank You!',
+        body: `Thanks for considering our AI-powered solutions. Let's innovate together and automate your business intelligence.`,
+        template: 'ai_technologies.html'
+    },
+    'EmailMarketing': {
+        subject: 'AI Solutions - Thank You!',
+        body: `Thanks for considering our AI-powered solutions. Let's innovate together and automate your business intelligence.`,
+        template: 'EmailMarketing.html'
+    },
+    'other': {
+        subject: 'Thank You for Reaching Out to DevNexus Solutions!',
+        body: `Thank you for contacting DevNexus Solutions. One of our specialists will get back to you shortly.`,
+        template: 'custom_req.html'
+    }
+};
 
 export const contactus = async (req, res) => {
     try {
-        const {name, email, phoneNumber,  services ,message} = req.body || {};
-        console.log("Request Body:", req.body);
+        const { name, email, phoneNumber, services, message } = req.body;
+        const content = serviceContent[services] || serviceContent.other;
 
-        const AdminMail = process.env.ADMIN_MAIL;
-        const AdminMail2 = process.env.ADMIN_MAIL2;
-
-        if(!email || !AdminMail || !AdminMail2) {
-            return res.status(400).json({
-                success: false,
-                message: "Missing Email or Admin Email",
-                data: {email: email || "Not Provided", AdminMail, AdminMail2}
-            });
-        }
-        
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: Number(process.env.SMTP_PORT),
@@ -25,73 +76,42 @@ export const contactus = async (req, res) => {
                 pass: process.env.EMAIL_PASS
             }
         });
-        const ClientMailOptions = {
-            from: process.env.USER_MAIL,
-            to: email,
-            subject: "thank you for contacting us",
-            html: `
-                <div style= "font-family: Arial, sans-serif; line-height: 1.6;">
-                    <h2>Thank you for reaching out</h2>
-                    <p>Dear ${name},</p>
-                    will get back to you shortly.</p>
-                    <p><strong>Here's what we received from you:</strong></p>
-                    <ul>
-                        <li><strong>Name:</strong>${name}</li>
-                        <li><strong>Email:</strong>${email}</li>
-                        <li><strong>Phone Number:</strong>${phoneNumber}</li>
-                        <li><strong>Selected Service:</strong> ${services}</li>                                                
-                        <li><strong>Message:</strong>${message}</li>
-                    </ul>
 
-                    <p>If any of the above information is incorrect, feel free to contact us again.</p>
-                    <p>Best regards,<br>
-                    DevNexus Team<br>
-                    <a href="http://devnexus.in/">https://devnexus.in</a></p>
-                </div>`
+        // === Email to Client ===
+        const clientHtmlContent = loadHtmlTemplate(content.template, {
+            'Client Name': name,
+            'Email': email,
+            'Phone Number': phoneNumber,
+            'Service': services,
+            'Message': message
+        });
+
+        const clientMailOptions = {
+            from: `"DevNexus Solutions" <${process.env.USER_MAIL}>`,
+            to: email, // Client's email
+            subject: content.subject,
+            html: clientHtmlContent // Send HTML template to client
         };
 
-        //define email content for admin
-        const AdminMailOptions = {
-            from: process.env.USER_MAIL,
-            to: AdminMail,
-            subject: "Contact Us",
-            html: `
-            <p>Dear DevNexus Team</p>
-            <p>We have received a new inquiry via the Contact Us form.
-            Please find the client details below:</p>
-            <p><b>Name:</b>${name}</p>
-            <p><b>Email:</b>${email}</p>
-            <p><b>phoneNumber:</b>${phoneNumber}</p>
-            <p><b>services:</b>${services}</p>
-            <p><b>message: </b>${message}</p>
-            <p>Please follow up with the client at your earliest convenience.</p>
-            `,
+        // === Email to Owner  ===
+        const ownerMailOptions = {
+            from: `"Website Contact Form" <${process.env.USER_MAIL}>`,
+            to: process.env.ADMIN_MAIL, // Owner's email
+            subject: `New Contact Request - ${services}`,
+            text: `New contact form submission:
+                   \nName: ${name}
+                   \nEmail: ${email}
+                   \nPhone: ${phoneNumber}
+                   \nService: ${services}
+                   \nMessage: ${message}`
         };
 
-        const AdminMailOptions2 = {
-            from: process.env.USER_MAIL,
-            to: AdminMail2,
-            subject: "Contact Us",
-            html: `
-            <p>Dear DevNexus Team</p>
-            <p>We have received a new inquiry via the Contact Us form.
-            Please find the client details below:</p>
-            <p><b>Name:</b>${name}</p>
-            <p><b>Email:</b>${email}</p>
-            <p><b>phoneNumber</b>${phoneNumber}</p>
-            <p><b>services:</b>${services}</p>
-            <p><b>message</b>${message}</p>
-            <p>Please follow up with the client at your earliest convenience.</p>
-            `,
-        };
-        //Send mail to client and Devnexus
-        await transporter.sendMail(ClientMailOptions);
-        await transporter.sendMail(AdminMailOptions);
-        await transporter.sendMail(AdminMailOptions2);
+        await transporter.sendMail(clientMailOptions);
+        await transporter.sendMail(ownerMailOptions);
 
-        res.status(200).json({success: true, message: 'sent successfully'})
+        res.status(200).json({ message: 'Form submitted and emails sent successfully.' });
     } catch (error) {
-        console.log("Email Error", error);
-        res.status(500).json({success: false, message: 'Error Sending Email'})
+        console.error('Mail sending error:', error);
+        res.status(500).json({ error: 'Failed to send email.' });
     }
 };

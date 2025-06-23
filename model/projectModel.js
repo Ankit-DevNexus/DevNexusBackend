@@ -17,6 +17,17 @@ const projectSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    websiteUrl : {
+        type: String,
+        required: true,
+        trim: true,
+        validate: {
+        validator: function (v) {
+            return /^(https?:\/\/)([\w-]+(\.[\w-]+)+)([\/\w .-]*)*\/?$/.test(v);
+        },
+        message: props => `${props.value} is not a valid URL!`
+    }
+    },
 },{timestamps: true});
 
 const ProjectModel = mongoose.model('Project', projectSchema);

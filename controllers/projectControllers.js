@@ -8,10 +8,11 @@ export const createPortfolioToCloudinary = async(req, res) => {
     try  {
         console.log("req.body:", req.body);
         console.log("req.files:", req.files);
+        console.log("PDF File Path:", req.files?.pdf?.[0]?.path);
 
         const image = req.files?.image?.[0]?.path;
         const logo = req.files?.logo?.[0]?.path;
-        const {description} = req.body;
+        const {description, websiteUrl} = req.body;
         const pdf = req.files?.pdf?.[0]?.path;
 
         if(!image || !logo ||!pdf) {
@@ -21,19 +22,19 @@ export const createPortfolioToCloudinary = async(req, res) => {
             });
         }
 
-        if( !description) {
+        if( !description || !websiteUrl) {
             return res.status(400).json({
                 success: false,
-                message: "description are required",
+                message: "description are website url are required",
             });
         }
-        let uploadedImage, uploadedLogo,uploadedPdf;
+        let uploadedImage, uploadedLogo ,uploadedPdf;
         try {
             uploadedImage = await uploadOnCloudinary(image);
             uploadedLogo = await uploadOnCloudinary(logo);
-            uploadedPdf = await uploadOnCloudinary(pdf);
-            // console.log("uploadedImage:", uploadedImage);
-            // console.log("uploadedPdf:", uploadedPdf); //?.url
+            uploadedPdf = await uploadOnCloudinary(pdf, {resource_type: "raw"});
+            console.log("uploaded pdf url:", uploadedPdf?.secure_url);
+            console.log("uploadedPdf:", uploadedPdf?.resource_type); //?.url
         } catch (error) {
             console.error("Error Uploading Image to Cloudinary:", error);
             return res.status(500).json({
@@ -46,6 +47,7 @@ export const createPortfolioToCloudinary = async(req, res) => {
             logo: uploadedLogo?.secure_url || '',
             description: description.trim(),
             pdf: uploadedPdf?.secure_url || '', 
+            websiteUrl: websiteUrl.trim(),
         });
         const savedProduct = await newProduct.save();
 
