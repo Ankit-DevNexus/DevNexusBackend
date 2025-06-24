@@ -9,6 +9,10 @@ const ContactusSchema = new mongoose.Schema({
         type:String,
         required: true
     },
+    phoneCountryCode: {
+        type : String,
+        required: true
+    },
     phoneNumber: {
         type : String,
         required: true

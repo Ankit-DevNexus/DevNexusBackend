@@ -13,9 +13,9 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    pdf: {
-        type: String,
-        // required: true
+    carousalImage: {
+        type: [String],
+        default: [],
     },
     websiteUrl : {
         type: String,

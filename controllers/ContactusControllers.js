@@ -64,7 +64,7 @@ const serviceContent = {
 
 export const contactus = async (req, res) => {
     try {
-        const { name, email, phoneNumber, services, message } = req.body;
+        const { name, email, phoneCountryCode, phoneNumber, services, message } = req.body;
         const content = serviceContent[services] || serviceContent.other;
 
         const transporter = nodemailer.createTransport({
@@ -99,11 +99,11 @@ export const contactus = async (req, res) => {
             to: process.env.ADMIN_MAIL, // Owner's email
             subject: `New Contact Request - ${services}`,
             text: `New contact form submission:
-                   \nName: ${name}
-                   \nEmail: ${email}
-                   \nPhone: ${phoneNumber}
-                   \nService: ${services}
-                   \nMessage: ${message}`
+                \nName: ${name}
+                \nEmail: ${email}
+                \nPhone: ${phoneCountryCode} ${phoneNumber}
+                \nService: ${services}
+                \nMessage: ${message}`
         };
 
         await transporter.sendMail(clientMailOptions);

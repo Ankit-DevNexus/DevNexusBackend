@@ -1,5 +1,5 @@
 import express from 'express';
-import {createPortfolioToCloudinary, getPortfolios} from '../controllers/projectControllers.js';
+import {createPortfolioToCloudinary, getAllPortfolios} from '../controllers/projectControllers.js';
 import { upload,  svgUpload} from '../middleware/multer.js';
 import { textSliderImage, addIndustry, addPort, addService, getServices, getTextSliderImages, getPorts, getIndustries } from '../controllers/landingPageControllers.js';
 import { addTeamMember, getTeamMembers } from '../controllers/ourTeamControllers.js';
@@ -18,12 +18,13 @@ const router = express.Router();
 router.post('/upload', upload.fields([
     {name: 'image', maxCount: 1},
     {name: 'logo', maxCount: 1},
-    {name: 'pdf', maxCount: 1},
+    { name: 'carousalImage' } 
+
 ]),
     createPortfolioToCloudinary
 );
 
-router.get('/all-upload', getPortfolios);
+router.get('/all-upload', getAllPortfolios);
 
 
 router.post('/addPort', upload.single('image'), addPort);
