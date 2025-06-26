@@ -1,18 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DevNexus Solutions | Mobile App Development</title>
   <style type="text/css">
     /* Client-specific styles */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
-    
+    body,
+    table,
+    td,
+    a {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    table,
+    td {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0;
+      height: auto;
+      line-height: 100%;
+      outline: none;
+      text-decoration: none;
+    }
+
     /* Reset styles */
-    body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
-    
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+    }
+
     /* iOS BLUE LINKS */
     a[x-apple-data-detectors] {
       color: inherit !important;
@@ -22,127 +47,127 @@
       font-weight: inherit !important;
       line-height: inherit !important;
     }
-    
+
     /* Main styles */
     body {
       font-family: Arial, sans-serif;
       color: #333333;
       background-color: #f5f7fa;
     }
-    
+
     .container {
       max-width: 600px;
       margin: 0 auto;
       background-color: #ffffff;
     }
-    
+
     .header {
       background: #223d61;
       padding: 50px 30px;
       text-align: center;
       color: #ffffff;
     }
-    
+
     .header h1 {
       font-size: 30px;
       margin: 0 0 10px 0;
       color: #ffffff;
     }
-    
+
     .header p {
       font-size: 18px;
       margin: 0;
       color: #ffffff;
     }
-    
+
     .content {
       padding: 30px;
     }
-    
+
     .greeting {
       font-size: 24px;
       color: #335D95;
       margin: 0 0 20px 0;
     }
-    
+
     .content p {
       font-size: 18px;
       line-height: 1.5;
       margin: 0 0 20px 0;
     }
-    
+
     .highlight {
       color: #335D95;
       font-weight: bold;
     }
-    
+
     .section-title {
       font-size: 22px;
       color: #335D95;
       margin: 30px 0 20px 0;
       text-align: center;
     }
-    
+
     .expertise-table {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
     }
-    
+
     .expertise-cell {
       width: 50%;
       vertical-align: top;
       padding: 15px;
       border: 1px solid #e0e0e0;
     }
-    
+
     .expertise-icon {
       color: #335D95;
       font-size: 26px;
       margin-bottom: 10px;
     }
-    
+
     .expertise-title {
       font-weight: 700;
       font-size: 20px;
       color: #335D95;
       margin: 0 0 10px 0;
     }
-    
+
     .expertise-desc {
       font-size: 18px;
       line-height: 1.4;
       margin: 0;
     }
 
-    .exicted-part{
+    .exicted-part {
       font-size: 18px;
     }
-    
+
     .tech-table {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
     }
-    
+
     .tech-cell {
       width: 25%;
       text-align: center;
       padding: 10px;
       border: 1px solid #e0e0e0;
     }
-    
+
     .tech-icon {
       color: #335D95;
       font-size: 24px;
       margin-bottom: 5px;
     }
-    
+
     .tech-name {
       font-size: 12px;
       margin: 0;
     }
-    
+
     .cta {
       background-color: #f0f4ff;
       padding: 20px;
@@ -150,13 +175,13 @@
       margin: 30px 0;
       border-radius: 5px;
     }
-    
+
     .cta-title {
       font-size: 20px;
       color: #335D95;
       margin: 0 0 15px 0;
     }
-    
+
     .cta-button {
       display: inline-block;
       background: #335D95;
@@ -167,79 +192,80 @@
       border-radius: 5px;
       font-weight: bold;
     }
-    
+
     .footer {
       background: #335D95;
       padding: 20px 30px;
       text-align: center;
       color: #ffffff;
     }
-    
+
     .contact-table {
       width: 100%;
       margin: 20px 0;
     }
-    
+
     .contact-cell {
       vertical-align: top;
       padding: 0px 10px;
     }
-    
+
     .contact-icon {
       color: #ffffff;
       font-size: 18px;
       margin-right: 10px;
     }
-    
+
     .contact-value {
       font-size: 14px;
       margin: 0;
     }
-    
+
     .contact-value a {
       color: #ffffff;
       text-decoration: none;
     }
-    
+
     .social-table {
       margin: 20px auto;
     }
-    
+
     .social-cell {
       padding: 0 5px;
     }
-    
+
     .social-link {
       display: inline-block;
       width: 36px;
       height: 36px;
-      background-color: rgba(255,255,255,0.1);
+      background-color: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
       text-align: center;
       line-height: 36px;
       color: #ffffff;
       text-decoration: none;
     }
-    
+
     .copyright {
       font-size: 12px;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       margin: 20px 0 0 0;
     }
-    
+
     /* Responsive styles */
     @media screen and (max-width: 480px) {
       .expertise-cell {
         display: block;
         width: 100% !important;
       }
-      
+
       .tech-cell {
         width: 50% !important;
       }
     }
   </style>
 </head>
+
 <body>
   <!-- Main container -->
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -253,61 +279,70 @@
               <p>Let's Build an App That Stands Out</p>
             </td>
           </tr>
-          
+
           <!-- Content -->
           <tr>
             <td class="content">
               <p class="greeting">Hi <span class="highlight">[Client Name]</span>,</p>
-              
-              <p>It's great to see your interest in our <span class="highlight">Mobile App Development</span> services. At DevNexus Solutions, we help businesses build intuitive, high-performance mobile apps across Android, iOS, and hybrid platforms.</p>
-              
-              <p>From ideation to deployment and post-launch support, our mobile team works closely with you to turn your vision into a user-friendly and scalable application that delivers real business results.</p>
-              
+
+              <p>It's great to see your interest in our <span class="highlight">Mobile App Development</span> services.
+                At DevNexus Solutions, we help businesses build intuitive, high-performance mobile apps across Android,
+                iOS, and hybrid platforms.</p>
+
+              <p>From ideation to deployment and post-launch support, our mobile team works closely with you to turn
+                your vision into a user-friendly and scalable application that delivers real business results.</p>
+
               <h3 class="section-title">Our Mobile App Services</h3>
-              
+
               <table class="expertise-table" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="expertise-cell">
                     <!-- <p class="expertise-icon">✧</p> -->
                     <p class="expertise-title">Android App Development</p>
-                    <p class="expertise-desc">Native Android apps built with Kotlin and Jetpack Compose for optimal performance and user experience.</p>
+                    <p class="expertise-desc">Native Android apps built with Kotlin and Jetpack Compose for optimal
+                      performance and user experience.</p>
                   </td>
                   <td class="expertise-cell">
                     <!-- <p class="expertise-icon">✧</p> -->
                     <p class="expertise-title">iOS App Development</p>
-                    <p class="expertise-desc">Beautiful iOS applications developed with Swift and SwiftUI, fully optimized for Apple devices.</p>
+                    <p class="expertise-desc">Beautiful iOS applications developed with Swift and SwiftUI, fully
+                      optimized for Apple devices.</p>
                   </td>
                 </tr>
                 <tr>
                   <td class="expertise-cell">
                     <!-- <p class="expertise-icon">✧</p> -->
                     <p class="expertise-title">Cross-Platform Solutions</p>
-                    <p class="expertise-desc">Single codebase apps using Flutter and React Native that work seamlessly across platforms.</p>
+                    <p class="expertise-desc">Single codebase apps using Flutter and React Native that work seamlessly
+                      across platforms.</p>
                   </td>
                   <td class="expertise-cell">
                     <!-- <p class="expertise-icon">✧</p> -->
                     <p class="expertise-title">App UI/UX Design</p>
-                    <p class="expertise-desc">Intuitive interfaces and engaging user experiences that drive adoption and retention.</p>
+                    <p class="expertise-desc">Intuitive interfaces and engaging user experiences that drive adoption and
+                      retention.</p>
                   </td>
                 </tr>
                 <tr>
                   <td class="expertise-cell">
                     <!-- <p class="expertise-icon">✧</p> -->
                     <p class="expertise-title">Third-Party Integrations</p>
-                    <p class="expertise-desc">Seamless connections with payment gateways, social media, analytics, and other services.</p>
+                    <p class="expertise-desc">Seamless connections with payment gateways, social media, analytics, and
+                      other services.</p>
                   </td>
                   <td class="expertise-cell">
                     <!-- <p class="expertise-icon">✧</p> -->
                     <p class="expertise-title">App Store Deployment</p>
-                    <p class="expertise-desc">Full support for publishing your app on Google Play Store and Apple App Store.</p>
+                    <p class="expertise-desc">Full support for publishing your app on Google Play Store and Apple App
+                      Store.</p>
                   </td>
                 </tr>
               </table>
-              
+
               <h3 class="section-title">Our Mobile Tech Stack</h3>
-                <!-- Tech Stack Section -->
+              <!-- Tech Stack Section -->
               <table border="0" cellpadding="0" cellspacing="0" width="100%"
-                style="background: #00357A; border-radius: 5px; margin: 30px 0;">
+                style="background: #00357A; border-radius: 5px; margin: 30px 0; text-align: center;">
                 <tr>
                   <td style="padding: 20px;">
                     <p class="section-title" style="color: #ffffff;">Our Technology Stack</p>
@@ -317,7 +352,8 @@
                         <td style="padding: 10px;">
                           <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
                             <tr>
-                              <td align="center" style="color: #fefefe; padding: 10px 15px; font-family: Arial, sans-serif;">
+                              <td align="center"
+                                style="color: #fefefe; padding: 10px 15px; font-family: Arial, sans-serif;">
                                 React Native</td>
                             </tr>
                           </table>
@@ -325,7 +361,8 @@
                         <td style="padding: 10px;">
                           <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
                             <tr>
-                              <td align="center" style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
+                              <td align="center"
+                                style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
                                 Flutter</td>
                             </tr>
                           </table>
@@ -333,7 +370,8 @@
                         <td style="padding: 10px;">
                           <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
                             <tr>
-                              <td align="center" style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
+                              <td align="center"
+                                style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
                                 Kotlin</td>
                             </tr>
                           </table>
@@ -341,7 +379,8 @@
                         <td style="padding: 10px;">
                           <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
                             <tr>
-                              <td align="center" style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
+                              <td align="center"
+                                style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
                                 Java</td>
                             </tr>
                           </table>
@@ -351,44 +390,22 @@
                         <td style="padding: 10px;">
                           <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
                             <tr>
-                              <td align="center" style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
+                              <td align="center"
+                                style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
                                 Angular</td>
                             </tr>
                           </table>
                         </td>
-                        <!-- <td style="padding: 10px;">
-                          <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
-                            <tr>
-                              <td align="center" style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
-                                Node.js</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td style="padding: 10px;">
-                          <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
-                            <tr>
-                              <td align="center" style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
-                                MongoDB</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td style="padding: 10px;">
-                          <table bgcolor="#004080" width="100%" style="border-radius: 6px;">
-                            <tr>
-                              <td align="center" style="color: #ffffff; padding: 10px 15px; font-family: Arial, sans-serif;">
-                                PostgreSQL</td>
-                            </tr>
-                          </table>
-                        </td> -->
+                       
                       </tr>
                     </table>
 
                   </td>
                 </tr>
               </table>
-              
+
               <h3 class="section-title">Why Choose Us</h3>
-              
+
               <table class="expertise-table" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="expertise-cell">
@@ -415,11 +432,13 @@
                   </td>
                 </tr>
               </table>
-              
-              <p class="exicted-part">We're excited to explore your app idea further. You'll hear from our mobile experts shortly to discuss your requirements in detail.</p>
-              
-              <p class="exicted-part">If you need quicker support, feel free to connect with us through our website or email us directly at <span class="highlight">contactus@devnexus.in</span>.</p>
-              
+
+              <p class="exicted-part">We're excited to explore your app idea further. You'll hear from our mobile
+                experts shortly to discuss your requirements in detail.</p>
+
+              <p class="exicted-part">If you need quicker support, feel free to connect with us through our website or
+                email us directly at <span class="highlight">contactus@devnexus.in</span>.</p>
+
               <table class="cta" border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td>
@@ -430,8 +449,8 @@
               </table>
             </td>
           </tr>
-          
-           <!-- Footer -->
+
+          <!-- Footer -->
           <tr>
             <td style="background: #0f172a; color: #e2e8f0; padding: 24px; text-align: center;">
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -452,46 +471,43 @@
                     <table width="100%" cellpadding="10" cellspacing="0" style="margin-bottom: 20px;">
                       <tr>
                         <td class="contact-cell" align="center" style="color: #ffffff; font-size: 14px;">
-                          📞 <span class="contact-value"><a  href="tel:+919711010160" style="color: #ffffff; text-decoration: none;">+91 9711010160</a></span>
+                          📞 <span class="contact-value"><a href="tel:+919211815556"
+                              style="color: #ffffff; text-decoration: none;">+91 9211815556</a></span>
                         </td>
                         <td class="contact-cell" align="center" style="color: #ffffff; font-size: 14px;">
                           ✉️ <span class="contact-value"><a href="mailto:contactus@devnexus.in"
                               style="color: #ffffff; text-decoration: none;">contactus@devnexus.in</a></span>
                         </td>
                         <td class="contact-cell" align="center" style="color: #ffffff; font-size: 14px;">
-                          📍 <span class="contact-value"><a href="https://maps.app.goo.gl/5sSvxY2TfDu9Z1yL6" style="color: #ffffff; text-decoration: none;">Gurgaon, India</a></span>
+                          📍 <span class="contact-value"><a href="https://maps.app.goo.gl/5sSvxY2TfDu9Z1yL6"
+                              style="color: #ffffff; text-decoration: none;">Gurgaon, India</a></span>
                         </td>
                       </tr>
                     </table>
                     <div style="margin: 20px 0;">
                       <a href="https://www.facebook.com/profile.php?id=61575914567317"
-                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='translateY(-5px)';">
-                        <img src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/facebook_hyqa1x.png"
-                          alt="Facebook" width="30" style="border-radius: 50%;">
+                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"> <img
+                        src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/facebook_hyqa1x.png"
+                        alt="Facebook" width="30" style="border-radius: 50%;">
                       </a>
                       <a href="https://www.linkedin.com/company/devnexus-solutions/"
-                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='translateY(-5px)';">
-                        <img src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/linkedin_gixvmi.png"
-                          alt="LinkedIn" width="30" style="border-radius: 50%;">
+                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"> <img
+                        src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/linkedin_gixvmi.png"
+                        alt="LinkedIn" width="30" style="border-radius: 50%;">
                       </a>
                       <a href="https://www.instagram.com/devnexussolutions"
-                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='translateY(-5px)';">
-                        <img src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/instagram_cyfmzr.png"
-                          alt="Instagram" width="30" style="border-radius: 50%;">
+                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"> <img
+                        src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/instagram_cyfmzr.png"
+                        alt="Instagram" width="30" style="border-radius: 50%;">
                       </a>
                       <a href="https://x.com/devnexussol?s=11"
-                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='translateY(-5px)';">
-                        <img src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/twitter_q56mel.png"
-                          alt="Twitter" width="30" style="border-radius: 50%;">
+                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"> <img
+                        src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/twitter_q56mel.png"
+                        alt="Twitter" width="30" style="border-radius: 50%;">
                       </a>
-                      <a href="https://www.youtube.com/channel/UCn5Vbu1XR6kYHUpjiloAGzA"
-                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='translateY(-5px)';">
-                        <img src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750671562/youtube_mwkpym.png"
+                     <a href="https://www.youtube.com/channel/UCn5Vbu1XR6kYHUpjiloAGzA"
+                        style="display: inline-block; margin: 0 6px; transition: all 0.3s ease;">
+                        <img src="https://res.cloudinary.com/dt4ohfuwc/image/upload/v1750833769/WhatsApp_Image_2025-06-25_at_12.10.59_PM_ju2hfx.jpg"
                           alt="Youtube" width="30" style="border-radius: 50%;">
                       </a>
                     </div>
@@ -522,4 +538,5 @@
     </tr>
   </table>
 </body>
+
 </html>
