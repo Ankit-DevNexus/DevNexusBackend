@@ -115,7 +115,6 @@
 //         res.status(500).json({ error: 'Failed to send email.' });
 //     }
 // };
-
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
@@ -179,11 +178,6 @@ const serviceContent = {
         body: `Thank you for contacting DevNexus Solutions. One of our specialists will get back to you shortly.`,
         template: 'custom_req.html'
     },
-    //    'index': {
-    //     subject: 'Email - Thank You!',
-    //     body: `Thanks for considering our Email solutions. Let's innovate together and automate your business intelligence.`,
-    //     template: 'index.html'
-    // },
 };
 
 export const contactus = async (req, res) => {
@@ -216,7 +210,7 @@ export const contactus = async (req, res) => {
 
         const clientMailOptions = {
             from: `"DevNexus Solutions" <${process.env.USER_MAIL}>`,
-            to: email, // Client's email
+            to: email.trim(), // Client's email
             subject: content.subject,
             html: clientHtmlContent // Send HTML template to client
         };
@@ -224,14 +218,14 @@ export const contactus = async (req, res) => {
         // === Email to Owner  ===
         const ownerMailOptions = {
             from: `"Website Contact Form" <${process.env.USER_MAIL}>`,
-            to: process.env.ADMIN_MAIL, // Owner's email
+            to: process.env.ADMIN_MAIL.trim(), // Owner's email
             subject: `New Contact Request - ${services}`,
             text: `New contact form submission:
-                    \nName: ${name}
-                    \nEmail: ${email}
-                    \nPhone: ${phoneNumber}
-                    \nService: ${services}
-                    \nMessage: ${message}`
+                   \nName: ${name}
+                   \nEmail: ${email}
+                   \nPhone: ${phoneNumber}
+                   \nService: ${services}
+                   \nMessage: ${message}`
         };
 
         await transporter.sendMail(clientMailOptions);
