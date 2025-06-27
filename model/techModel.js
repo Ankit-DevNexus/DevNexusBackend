@@ -10,7 +10,7 @@ const techSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ["Frontend", "Backend", "Database", "UI/UX", "CMS", "Deveops"],
+        enum: ["Frontend", "Backend", "Database", "UI/UX", "CMS", "DevOps"],
         required: true
     },
 }, {timestamps: true});

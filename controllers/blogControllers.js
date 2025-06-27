@@ -26,7 +26,7 @@ export const BlogController = async (req, res) => {
 
 export const AllBlogController = async (req, res) =>{
     try {
-    const blogs = await blogModel.find().sort({ createdAt: -1}).limit(10);
+    const blogs = await blogModel.find().sort({ createdAt: -1});
     res.status(200).json(blogs);
 
     } catch (error) {
