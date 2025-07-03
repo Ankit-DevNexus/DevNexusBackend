@@ -3,7 +3,7 @@ import {createPortfolioToCloudinary, getAllPortfolios} from '../controllers/proj
 import { upload,  svgUpload} from '../middleware/multer.js';
 import { textSliderImage, addIndustry, addPort, addService, getServices, getTextSliderImages, getPorts, getIndustries } from '../controllers/landingPageControllers.js';
 import { addTeamMember, getTeamMembers } from '../controllers/ourTeamControllers.js';
-import { BlogController, AllBlogController, BlogImageController } from '../controllers/blogControllers.js';
+import { BlogController, AllBlogController, BlogImageController, getBlogByIdController } from '../controllers/blogControllers.js';
 import { subscribeToNewsletter } from '../controllers/newsletterControllers.js';
 import { addTestimonials, getTestimonials } from '../controllers/testimonialsControllers.js';
 import { addBrand, getBrands } from '../controllers/brandControllers.js';
@@ -48,10 +48,15 @@ router.get('/all-Industry', getIndustries);
 router.post('/addTeamMember', svgUpload.single('avatar'), addTeamMember);
 router.get('/All-team', getTeamMembers);
 
-// router.post('/upload-image', upload.single('image'), BlogImageController);
+// // router.post('/upload-image', upload.single('image'), BlogImageController);
+// router.post('/upload-image', upload.single('upload'), BlogImageController);
+// router.post('/create-blogs', BlogController);
+// router.get('/blogs', AllBlogController);
+
 router.post('/upload-image', upload.single('upload'), BlogImageController);
-router.post('/create-blogs', BlogController);
+router.post('/create-blogs', upload.single("featuredImage"), BlogController);
 router.get('/blogs', AllBlogController);
+router.get('/blogs/:id', getBlogByIdController);
 
 router.post("/subscribe", subscribeToNewsletter);
 
