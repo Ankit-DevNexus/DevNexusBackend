@@ -20,7 +20,7 @@ export const BlogController = async (req, res) => {
       });
     }
 
-   const BlogFeaturedImage = req.file?.path;
+  const BlogFeaturedImage = req.file?.path;
 
     if (!BlogFeaturedImage) {
       return res.status(400).json({
