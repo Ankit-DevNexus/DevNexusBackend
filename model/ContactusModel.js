@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { getDashboardDB } from "../config/ConnectDashboardDB.js";
+import { getDashboardDB } from "../config/connectDashboardDB.js";
 
 const ContactusSchema = new mongoose.Schema({
     name: { type: String, required: true },
